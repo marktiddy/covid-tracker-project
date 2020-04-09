@@ -8,6 +8,21 @@ const Cards = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
   if (!confirmed) {
     return "Loading...";
   }
+
+  //Calculate some percentages
+  const deathPercent = confirmed
+    ? ((deaths.value / confirmed.value) * 100).toFixed(2)
+    : 0;
+  const recoveredPercent = confirmed
+    ? ((recovered.value / confirmed.value) * 100).toFixed(2)
+    : 0;
+  const activePercent = confirmed
+    ? (
+        100 -
+        ((recovered.value + deaths.value) / confirmed.value) * 100
+      ).toFixed(2)
+    : 0;
+
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -29,6 +44,9 @@ const Cards = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
                 duration={2.5}
                 separator=","
               />
+            </Typography>
+            <Typography className={styles.blueText}>
+              {activePercent}% of cases still active.
             </Typography>
             <Typography color="textSecondary">
               Last Updated: {new Date(lastUpdate).toDateString()}
@@ -58,6 +76,10 @@ const Cards = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
+
+            <Typography className={styles.greenText}>
+              {recoveredPercent}% of infected have recovered.
+            </Typography>
             <Typography color="textSecondary">
               Last Updated: {new Date(lastUpdate).toDateString()}
             </Typography>
@@ -85,8 +107,11 @@ const Cards = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
+            <Typography className={styles.redText}>
+              {deathPercent}% of infected have died.
+            </Typography>
             <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
+              Last Updated: {new Date(lastUpdate).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of deaths from COVID-19
