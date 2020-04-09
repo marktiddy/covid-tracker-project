@@ -33,6 +33,12 @@ class App extends React.Component {
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />
         <Chart data={data} country={country} />
+        <p className={styles.footer}>
+          Built following a tutorial from{" "}
+          <a href="https://www.youtube.com/channel/UCmXmlB4-HJytD7wek0Uo97A">
+            JavaScript Mastery
+          </a>
+        </p>
       </div>
     );
   }

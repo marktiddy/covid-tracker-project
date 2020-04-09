@@ -8,3 +8,12 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+
+.footer {
+  font-size: small;
+  color: "#3333ff";
+}
+
+.footer a {
+  color: rgba(0, 0, 255, 0.5);
+}
